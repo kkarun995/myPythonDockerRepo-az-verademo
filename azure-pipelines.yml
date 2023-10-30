@@ -18,8 +18,7 @@ stages:
   jobs:
   - job: Build
     displayName: Build
-    pool:
-      vmImage: ubuntu-latest
+    
     steps:
     - task: Docker@2
       displayName: Build an image
@@ -30,12 +29,6 @@ stages:
         repository: $(repoName)
         tags: |
           $(tag)
-    - task: ArtifactoryDocker@1
-      inputs:
-        command: 'push'
-        artifactoryService: 'Art_SVC_conn'
-        targetRepo: '$(repoName)'
-        imageName: '$(imageName):$(tag)'
 
     - task: Veracode@3
       inputs:
