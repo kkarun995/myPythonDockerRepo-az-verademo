@@ -37,11 +37,11 @@ stages:
         targetRepo: '$(repoName)'
         imageName: '$(imageName):$(tag)'
 
-- task: Veracode@3
-  inputs:
-    ConnectionDetailsSelection: 'Service Connection'
-    AnalysisService: 'veracode-api'
-    veracodeAppProfile: 'Azure-demo-Arun'
-    version: '$(build.buildNumber)'
-    filepath: '$(build.artifactstagingdirectory)'
-    maximumWaitTime: '360'
+    - task: Veracode@3
+      inputs:
+        ConnectionDetailsSelection: 'Service Connection'
+        AnalysisService: 'veracode-api'
+        veracodeAppProfile: 'Azure-demo-Arun'
+        version: '$(build.buildNumber)'
+        filepath: '$(build.artifactstagingdirectory)'
+        maximumWaitTime: '360'
