@@ -5,8 +5,9 @@
 trigger:
 - master
 
-resources:
-- repo: self
+pool:
+  name: Default
+
 
 variables:
   tag: '$(Build.BuildId)'
@@ -35,4 +36,12 @@ stages:
         artifactoryService: 'Art_SVC_conn'
         targetRepo: '$(repoName)'
         imageName: '$(imageName):$(tag)'
-    
+
+- task: Veracode@3
+  inputs:
+    ConnectionDetailsSelection: 'Service Connection'
+    AnalysisService: 'veracode-api'
+    veracodeAppProfile: 'Azure-demo-Arun'
+    version: '$(build.buildNumber)'
+    filepath: '$(build.artifactstagingdirectory)'
+    maximumWaitTime: '360'
